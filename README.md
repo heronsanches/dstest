@@ -9,6 +9,7 @@
 * Netbeans 8.2 Development Version  
 * [JPA Persistence file here](https://github.com/heronsanches/dstest/blob/master/Lunch/src/main/resources/META-INF/persistence.xml)  
 * [Database files here](https://github.com/heronsanches/dstest/tree/master/database)  
+* [User and password to make login from it backup are: hr.sanches@gmail.com and dbserveradmin](https://github.com/heronsanches/dstest/blob/master/database/pg_dump_full.sql)
 
 ### What do you can highlight up about the system? 
 1. Database was modeled to support n enterprises.
