@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html[
+   <!ENTITY amp "&#38;"> 
+   ]>
+   <html xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:jsf="http://xmlns.jcp.org/jsf"
+         xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+      <head jsf:id="head">
+         <title>DBSERVER Lunch Hour</title>
+         <meta charset="UTF-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"/> 
+         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+         <link href='resources/css/custom.css' rel='stylesheet' type='text/css'/>
+         <link href="../../resources/css/header.css" rel="stylesheet"/>
+         <link rel="shortcut icon" href="resources/ico/favicon.png"/> 
+      </head>
+
+      <body jsf:id="body">
+
+         <nav class="navbar navbar-default navbar-inverse" role="navigation">
+            <div class="container-fluid">
+               <!-- Brand and toggle get grouped for better mobile display -->
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                  </button>
+               </div>
+
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <form class="navbar-form navbar-left" role="search" jsf:id="form_search">
+                  <div class="form-group">
+                     <input type="text" class="form-control" placeholder="lunch place's name">
+                        <f:ajax event="keyup" delay="1000"/>
+                     </input>
+                     <span class="glyphicon glyphicon-search" style="color: #ddd; margin-left: 10px"></span>
+                  </div>
+               </form>
+
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>${sessionScope.loginEmail}</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                           <li>
+                              <form jsf:id="form_logout">
+                                 <input jsf:id="btn_logout" jsf:action="#{loginB.logout()}" type="submit" class="btn btn-default" style="width: 100%; margin-bottom: 10px" value="Logout"/>
+                              </form>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+         </nav>
+
+         <div id="result_search" class="container">
+
+            <h3><h:outputText id="m_vote" value="#{votingB.message}"/></h3>
+
+            <h:dataTable id="dt_restaurant" value="#{restaurantB.data}" var="t" class="table table-striped">
+               <h:column>
+                  <f:facet name="header">Id</f:facet>
+                     #{t.idRestaurant}
+               </h:column>
+               <h:column>
+                  <f:facet name="header">Name</f:facet>
+                     #{t.txtName}
+               </h:column>
+               <h:column>
+                  <f:facet name="header">Address</f:facet>
+                  #{t.txtAddrStreet}, #{t.txtAddrNumber} - #{t.txtAddrNeighborhood}
+               </h:column>
+               <h:column>
+                  <button jsf:id="btn_vote" type="button" class="btn btn-primary active">Vote
+                     <f:ajax listener="#{votingB.vote(sessionScope.loginEmail, t.idRestaurant)}" render="m_vote"/>
+                  </button>
+               </h:column>
+               <h:column>
+                  <button jsf:id="btn_map" onclick="loadLocation('#{t.numAddrLatitude}', '#{t.numAddrLongitude}', '#{t.txtName}',
+                                '#{t.txtAddrStreet}' + ', ' + '#{t.txtAddrNumber}' + ' - ' + '#{t.txtAddrNeighborhood}')" class="btn btn-info active">
+                     <span class="glyphicon glyphicon-map-marker"></span> Map
+                     <f:ajax />
+                  </button>
+               </h:column>
+            </h:dataTable>
+         </div>
+
+         <div id="map"></div>
+
+         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+         <script src="resources/js/page/_lunch/map.js"/>
+         <script>
+                     function initMap() {
+                        loadMarkers('#{restaurantB.getDataJsonArray()}');
+                     }
+         </script>
+         <script async="true" defer="true"
+                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKEgdRJmEhy6cEwjeCfCHLCtxlId06jcc&amp;callback=initMap" /> 
+
+      </body>
+   </html>
