@@ -7,7 +7,7 @@
 * PostgreSQL 9.5.5    
 * Maven   
 * Netbeans 8.2 Development Version  
-* [JPA Persistence file here](https://github.com/heronsanches/dstest/blob/master/Lunch/src/main/resources/META-INF/persistence.xml)  
+* [JPA Persistence file here](https://github.com/heronsanches/lunch-hour/blob/master/LunchHour/LunchHour-ejb/src/main/resources/META-INF/persistence.xml)  
 * [Database files here](https://github.com/heronsanches/dstest/tree/master/database)  
 * [User and password to make login from it backup are: hr.sanches@gmail.com and dbserveradmin](https://github.com/heronsanches/dstest/blob/master/database/pg_dump_full.sql)
 
