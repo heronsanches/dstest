@@ -27,7 +27,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "restaurant")
 @NamedQueries({
-   @NamedQuery(name = "Restaurant.findAllByCityProfessional", query = "SELECT r FROM Restaurant r WHERE r.idCity = :idCity")
+   @NamedQuery(name = "Restaurant.findAllByCityProfessional", query = "SELECT r FROM Restaurant r WHERE r.idCity = :idCity ORDER BY r.txtName"),
+   @NamedQuery(name = "Restaurant.totalRestaurantByCityProfessional", query = "SELECT COUNT(r.idRestaurant) FROM Restaurant r WHERE r.idCity = :idCity")
 })
 public class Restaurant implements Serializable {
 

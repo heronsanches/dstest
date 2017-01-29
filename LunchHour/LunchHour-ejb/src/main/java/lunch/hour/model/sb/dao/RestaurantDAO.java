@@ -40,5 +40,47 @@ public class RestaurantDAO implements RestaurantDAOI {
             
    }
    
+
+   @Override
+   public List findRestaurantByRange(int first, int qttRows, String txtEmail) {
+      
+      try{
+         
+         TypedQuery<City> tq = (TypedQuery<City>) em.createNamedQuery("Professional.findIdCidadeByTxtEmail", City.class)
+         .setParameter("txtEmail", txtEmail);
+         
+         return em.createNamedQuery("Restaurant.findAllByCityProfessional", Restaurant.class)
+            .setParameter("idCity", tq.getSingleResult())
+            .setFirstResult(first)
+            .setMaxResults(qttRows)
+            .getResultList();
+         
+      }catch(IllegalStateException |  PersistenceException e){
+      }
+      
+      return null;
+      
+   }
+   
+
+   @Override
+   public Long totalRestaurantOnCity(String txtEmail) {
+      
+      try{
+         
+         TypedQuery<City> tq = (TypedQuery<City>) em.createNamedQuery("Professional.findIdCidadeByTxtEmail", City.class)
+         .setParameter("txtEmail", txtEmail);
+         
+         return em.createNamedQuery("Restaurant.totalRestaurantByCityProfessional", Long.class)
+            .setParameter("idCity", tq.getSingleResult())
+            .getSingleResult();
+         
+      }catch(IllegalStateException |  PersistenceException e){
+      }
+      
+      return null;
+      
+   }
+   
    
 }

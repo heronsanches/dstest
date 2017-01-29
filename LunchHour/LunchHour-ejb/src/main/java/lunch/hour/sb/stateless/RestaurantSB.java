@@ -20,6 +20,18 @@ public class RestaurantSB implements RestaurantSBLocal {
    public List findAllRestaurantOnCity(String professionalEmail) {
       return restaurantDAO.findAllRestaurantOnCity(professionalEmail);
    }
+
+   
+   @Override
+   public List findRestaurantByRange(int first, int qttRows, String txtEmail) {
+      return restaurantDAO.findRestaurantByRange(first, qttRows, txtEmail);
+   }
+
+   
+   @Override
+   public Long totalRestaurantOnCity(String professionalEmail) {
+      return restaurantDAO.totalRestaurantOnCity(professionalEmail);
+   }
  
    
 }

@@ -1,8 +1,9 @@
 var markers = [];
 var defaultZoom = 15;
 
-function loadMarkers(jsonArrayRestaurant) {
 
+function loadMarkers(jsonArrayRestaurant) {
+   
    var ja = JSON.parse(jsonArrayRestaurant);
    var latlng = new google.maps.LatLng(ja[0].latitude, ja[0].longitude);
 

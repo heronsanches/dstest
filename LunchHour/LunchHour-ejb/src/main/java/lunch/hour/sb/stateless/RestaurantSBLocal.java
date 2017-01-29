@@ -9,5 +9,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface RestaurantSBLocal {
+   
    public List findAllRestaurantOnCity(String professionalEmail);
+   public List findRestaurantByRange(int first, int qttRows, String txtEmail);
+   public Long totalRestaurantOnCity(String professionalEmail);
+   
 }

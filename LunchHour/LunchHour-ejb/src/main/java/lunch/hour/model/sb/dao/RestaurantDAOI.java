@@ -9,5 +9,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface RestaurantDAOI {
+   
    public List findAllRestaurantOnCity(String txtEmail);
+   public List findRestaurantByRange(int first, int qttRows, String txtEmail);
+   public Long totalRestaurantOnCity(String txtEmail);
+   
 }

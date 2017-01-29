@@ -64,14 +64,25 @@
 
             <h3><h:outputText id="m_vote" value="#{votingB.message}"/></h3>
 
-            <h:dataTable id="dt_restaurant" value="#{restaurantB.data}" var="t" class="table table-striped">
-               <h:column>
+            <h:dataTable id="dt_restaurant" value="#{restaurantB.data}" var="t" rows="#{restaurantB.rowsOnPage}" 
+                         binding="#{restaurantB.dataTable}" class="table table-striped">
+               <h:column rendered="false">
                   <f:facet name="header">Id</f:facet>
                      #{t.idRestaurant}
                </h:column>
                <h:column>
-                  <f:facet name="header">Name</f:facet>
-                     #{t.txtName}
+                  <f:facet name="header">
+                     Name
+                     <button jsf:id="btn_order_asc" class="btn btn-default"  type="submit" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <f:ajax render="dt_restaurant" listener="#{restaurantB.orderByName('asc')}"/>
+                     </button>
+                     <button jsf:id="btn_order_desc" class="btn btn-default"  type="submit" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                        <f:ajax render="dt_restaurant" listener="#{restaurantB.orderByName('desc')}"/>
+                     </button>
+                  </f:facet>
+                  #{t.txtName}
                </h:column>
                <h:column>
                   <f:facet name="header">Address</f:facet>
@@ -84,12 +95,42 @@
                </h:column>
                <h:column>
                   <button jsf:id="btn_map" onclick="loadLocation('#{t.numAddrLatitude}', '#{t.numAddrLongitude}', '#{t.txtName}',
-                                '#{t.txtAddrStreet}' + ', ' + '#{t.txtAddrNumber}' + ' - ' + '#{t.txtAddrNeighborhood}')" class="btn btn-info active">
+                                      '#{t.txtAddrStreet}' + ', ' + '#{t.txtAddrNumber}' + ' - ' + '#{t.txtAddrNeighborhood}')" class="btn btn-info active">
                      <span class="glyphicon glyphicon-map-marker"></span> Map
                      <f:ajax />
                   </button>
                </h:column>
             </h:dataTable>
+
+            <div jsf:id="div_pagination_pageof" class="btn-toolbar">
+
+               <div class="btn-group">
+                  <button class="btn btn-default" disabled="true">
+                     <b>#{restaurantB.pageOfPages()}</b>
+                  </button>
+               </div>
+               
+               <div jsf:id="div_buttons" class="btn-group">
+                  <button jsf:id="btn_first_page" class="btn btn-default" jsf:disabled="#{restaurantB.isFirstPage()}" >
+                     First Page
+                     <f:ajax render="dt_restaurant div_pagination div_pagination_pageof div_buttons" listener="#{restaurantB.goToFirstPage()}"/>
+                  </button>
+                  <button jsf:id="btn_previous_page" class="btn btn-default" jsf:disabled="#{restaurantB.isFirstPage()}">
+                     Previous Page
+                     <f:ajax render="dt_restaurant div_pagination div_pagination_pageof div_buttons" listener="#{restaurantB.goToPreviousPage()}"/>
+                  </button>
+                  <button jsf:id="btn_next_page" class="btn btn-default" jsf:disabled="#{restaurantB.isLastPage()}">
+                     Next Page
+                     <f:ajax render="dt_restaurant div_pagination div_pagination_pageof div_buttons" listener="#{restaurantB.goToNextPage()}"/>
+                  </button>
+                  <button jsf:id="btn_last_page" class="btn btn-default" jsf:disabled="#{restaurantB.isLastPage()}">
+                     Last Page
+                     <f:ajax render="dt_restaurant div_pagination div_pagination_pageof div_buttons" listener="#{restaurantB.goToLastPage()}"/>
+                  </button>
+               </div>
+               
+            </div>
+
          </div>
 
          <div id="map"></div>
@@ -98,9 +139,9 @@
          <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
          <script src="resources/js/page/_lunch/map.js"/>
          <script>
-                     function initMap() {
-                        loadMarkers('#{restaurantB.getDataJsonArray()}');
-                     }
+            function initMap() {
+               loadMarkers('#{restaurantB.getDataJsonArray()}');
+            }
          </script>
          <script async="true" defer="true"
                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKEgdRJmEhy6cEwjeCfCHLCtxlId06jcc&amp;callback=initMap" /> 

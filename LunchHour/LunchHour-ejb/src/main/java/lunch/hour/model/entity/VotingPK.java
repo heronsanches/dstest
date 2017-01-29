@@ -23,24 +23,29 @@ public class VotingPK implements Serializable {
    @Size(min = 1, max = 11)
    @Column(name = "id_professional_txt_cpf")
    private String idProfessionalTxtCpf;
+   
    @Basic(optional = false)
    @NotNull
    @Column(name = "id_restaurant")
    private int idRestaurant;
+   
    @Basic(optional = false)
    @NotNull
    @Column(name = "id_voting_dt")
    @Temporal(TemporalType.DATE)
    private Date idVotingDt;
 
+   
    public VotingPK() {
    }
+   
 
    public VotingPK(String idProfessionalTxtCpf, int idRestaurant, Date idVotingDt) {
       this.idProfessionalTxtCpf = idProfessionalTxtCpf;
       this.idRestaurant = idRestaurant;
       this.idVotingDt = idVotingDt;
    }
+   
 
    public String getIdProfessionalTxtCpf() {
       return idProfessionalTxtCpf;
