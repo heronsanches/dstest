@@ -5792,6 +5792,8 @@ COPY restaurant (id_restaurant, txt_name, txt_addr_street, txt_addr_neighborhood
 3	Bento Grill Restaurante	Av. Bento Gonçalves	Partenon		90650-002	2182	-30.0593320	-51.1926170	4928
 4	Casa Velha Churrascaria	R. Barão do Amazonas	Partenon		90670-002	1618	-30.0576950	-51.1905930	4928
 5	Panorama Gastronômico	Prédio 40, PUCRS - Av. Ipiranga	Praia de Belas		90160-092	6681	-30.0586890	-51.1760120	4928
+6	Restaurante Paladar Gaúcho	Av. Bento Gonçalves	Partenon		90650-000	4289	-30.0619980	-51.1732910	4928
+7	Espaço 32 Restaurante e Café	Av. Bento Gonçalves	Santana		90650-001	4314	-30.0612840	-51.1737660	4928
 \.
 
 
@@ -5799,7 +5801,7 @@ COPY restaurant (id_restaurant, txt_name, txt_addr_street, txt_addr_neighborhood
 -- Name: restaurant_id_restaurant_seq_1; Type: SEQUENCE SET; Schema: public; Owner: heron
 --
 
-SELECT pg_catalog.setval('restaurant_id_restaurant_seq_1', 5, true);
+SELECT pg_catalog.setval('restaurant_id_restaurant_seq_1', 7, true);
 
 
 --
@@ -5843,6 +5845,10 @@ TO	Tocantins
 
 COPY voting (id_professional_txt_cpf, id_restaurant, id_voting_dt) FROM stdin;
 02518068554	1	2017-01-16
+77258461825	2	2017-01-23
+77258461825	2	2017-01-26
+77258461825	2	2017-01-27
+77258461825	7	2017-01-28
 \.
 
 
