@@ -24,8 +24,7 @@
 
 ### What would you made to enhancement your system?
 
-1. It would be created a EJB module separeted, but them are implementing local interfaces, so it can be desacopled without more problems and deployed a part of the .war into the same JVM.
-2. Implementing the searchbar function.
+1. Implementing the searchbar function.
 2. Continuation of the scheduling system, implementing rules that turn them totaly automaticaly.
 2. Development into TDD world. 
 
